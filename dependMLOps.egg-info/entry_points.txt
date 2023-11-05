@@ -1,0 +1,2 @@
+[console_scripts]
+dependMLOps = dependMLOps.scripts.main:__main__
