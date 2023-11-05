@@ -27,7 +27,7 @@ from DependMLMoi.constants import (
     REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET,
     REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME, CUSTOM
 )
-from DependMLMoi.dependencies import PackageHandler
+from dependencies import PackageHandler.main_libraries
 
 _logger = _logger
 args = parse_args()
@@ -68,9 +68,11 @@ def install_dotenv():
     from dotenv import load_dotenv, find_dotenv
    
 
-def check_dotenv():
-    if dotenv_version != REQUIRED_DOTENV_VERSION:
+def check_dotenv(REQUIRED_DOTENV_VERSION, auto_install):
+    if dotenv_version == REQUIRED_DOTENV_VERSION and auto_install:
         install_dotenv()
+    else:
+        _logger.error("Dotenv version is not up to date. Please update it to the latest version.")
     return True
 
 def check_library_installed(library_name, auto_install=False):
@@ -111,9 +113,9 @@ def check_wandb_login():
         job_type="inference",
         project=project,
         group=f"minimal_{session_group}",
-        username = (os.getenv('USER') | os.getenv('USERNAME')
-        tags=["test"],
-        )
+        username = (os.getenv('USER') | os.getenv('USERNAME')),
+        tags=["test"])
+        
         callbacks = [StdOutCallbackHandler(), wandb_callback]
 
         return callbacks
@@ -143,7 +145,7 @@ def debug_setup(AUTO_INSTALL=False, DEBUG=False):
 
 
 # This function is now the main entry point to the library. It should be called explicitly.
-def run_setup(auto_install=False, args*):
+def run_setup(auto_install=False):
     # Check if dotenv is installed and meets the required version
     if not check_dotenv(REQUIRED_DOTENV_VERSION, auto_install):
         sys.exit("The required dotenv version is not installed.")
