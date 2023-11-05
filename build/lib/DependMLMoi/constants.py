@@ -1,11 +1,11 @@
-from arg_parser import parse_args
+from .arg_parser import parse_args
 
 #Default
 NAME = None
 TYPE = "LLM"
 AUTO_INSTALL = False
-REQUIRED_DOTENV_VERSION = 1.0.0
-LEVEL = DEBUG
+REQUIRED_DOTENV_VERSION = "1.0.0"
+LEVEL = "DEBUG"
 DEBUG = False
 LOGGING = True
 QUIET = False

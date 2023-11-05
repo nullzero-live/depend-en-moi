@@ -1,6 +1,6 @@
 import logging
 import os
-from constants import LOGS_DIR
+from DependMLMoi.constants import LOGS_DIR
 
 # Create a logger object with the name '_logger'
 _logger = logging.getLogger('_logger')

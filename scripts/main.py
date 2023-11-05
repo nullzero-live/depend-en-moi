@@ -1,7 +1,7 @@
 from DependMLMoi.depend_ml import run_setup
 from DependMLMoi.arg_parser import parse_args
 from dependencies import package_handler
-from ..DependMLMoi.dependencies import PackageHandler.main_libraries
+from ..DependMLMoi.dependencies.PackageHandler import main_libraries
 
 def main():
     args = parse_args()

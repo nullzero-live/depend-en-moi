@@ -1,6 +1,7 @@
 import argparse
 import os
 from contextlib import redirect_stdout
+from DependMLMoi import __version__
 
 def parse_args():
     # Create the parser
@@ -15,6 +16,7 @@ def parse_args():
     parser.add_argument('-c', '--custom', action='store_true', help='add a custom library')
     parser.add_argument('-l', '--level', action='store_true', help='set logging level')
     parser.add_argument('-t', '--type', action='store_true', help='Type of App (LLM, ML, Web)')
+    parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}', help='Version of DependMLOps')
 
     # Parse the arguments
     args = parser.parse_args()

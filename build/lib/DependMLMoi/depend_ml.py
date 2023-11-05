@@ -13,9 +13,9 @@ Options include:
 import os
 import subprocess
 import sys
-import logging
-from datetime import datetime, timedelta
 from DependMLMoi.utils.logs.log_tool import _logger
+from datetime import datetime, timedelta
+
 from pathlib import Path
 from arg_parser import parse_args
 from datetime import datetime, timedelta
@@ -25,9 +25,7 @@ from langchain.callbacks import WandbCallbackHandler, StdOutCallbackHandler
 # Custom imports
 from DependMLMoi.constants import (
     REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET,
-    REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME, CUSTOM
-)
-from DependMLMoi.dependencies import PackageHandler
+    REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME, CUSTOM)
 
 _logger = _logger
 args = parse_args()
