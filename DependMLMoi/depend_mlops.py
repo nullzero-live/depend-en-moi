@@ -1,5 +1,5 @@
-from _constants import AUTO_INSTALL, REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET, REQUIREMENTS_PATH, LOGS_DIR
-from _libraries import main_libraries
+from DependMLMoi.constants import AUTO_INSTALL, REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET, REQUIREMENTS_PATH, LOGS_DIR
+from DependMLMoi.dependencies import main_libraries
 
 
 ''' A library designed to initialize required modules for MLOps Tools by Nullzero

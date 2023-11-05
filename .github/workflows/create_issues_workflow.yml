@@ -7,7 +7,7 @@ on:
     paths:
       - 'TODO.md'
       - 'active_repo.py'
-      - 'create_issues_from_todo.py'
+      - '../create_issues_from_todo.py'
 
 jobs:
   check_and_create_issues:
@@ -15,17 +15,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to the latest version
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4  # Updated to the latest version
         with:
           python-version: '3.11'
 
       - name: Install Python dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt  
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Check if repository is active
         id: active_check
