@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Git Add, Commit, and Push",
+            "type": "shell",
+            "command": "git add . && git commit -m \"${input:commitMessage}\" && git push \"${input:remote}\" main",
+            "group": "none",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "commitMessage",
+            "description": "Commit message:",
+            "default": "Quick commit"
+        },
+        {
+            "type": "promptString",
+            "id": "remote",
+            "description": "remote repo",
+            "default": "gh"
+        }
+    ]
+}
