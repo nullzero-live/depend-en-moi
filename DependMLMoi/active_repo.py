@@ -1,5 +1,6 @@
 import subprocess
 import json
+from github import Github
 
 # Function to get the URL of the remote repository
 def get_remote_url():
