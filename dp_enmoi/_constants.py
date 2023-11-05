@@ -1,0 +1,6 @@
+AUTO_INSTALL=False
+REQUIRED_DOTENV_VERSION=1.0.0
+DEBUG = False
+REQUIREMENTS_PATH = "./requirements.txt"
+
+

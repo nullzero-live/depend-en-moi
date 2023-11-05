@@ -1,0 +1,16 @@
+dp-enmoi/
+│
+├── dp_enmoi/           # Main package directory
+│   ├── __init__.py     # Initializes the Python package
+│   └── module.py       
+│
+├── tests/              # Directory for test cases
+│   ├── __init__.py
+│   └── test_module.py  
+│
+├── .gitignore          # Specifies which files to ignore in version control
+├── LICENSE             # License file
+├── README.md           # Readme file with package information
+├── setup.py            # Setup script for installing the package
+├── setup.cfg           # Configuration of the setup script
+└── pyproject.toml      # Configuration file for building and distributionv

@@ -1,0 +1,27 @@
+.
+├── LICENSE.txt
+├── README.me
+├── __init__.py
+├── docs
+├── dp_enmoi
+│   ├── __init__.py
+│   ├── _constants.py
+│   ├── _libraries.py
+│   ├── arg_parser.py
+│   ├── dependonme.py
+│   ├── main.py
+│   └── utils
+│       └── logs
+│           ├── donmoi.log
+│           └── log_tool.py
+├── pyproject.toml
+├── requirements.txt
+├── setup.cfg
+├── setup.py
+└── tree
+    ├── dep_en_moi.yaml
+    ├── module_guidance.yaml
+    ├── proj-tree.txt
+    └── tree.yaml
+
+6 directories, 19 files

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+name = "dp-enmoi"
+version = "0.0.1"
+author = "Nullzero"
+author_email = "p4rlx-news@pm.me"
+
+[project]
+name = 'dp-enmoi'
+version = '0.0.1'
+description = 'Manage MLOps Dependencies and More...'
+readme = 'README.md'
+license = {file = 'LICENSE.txt'}
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+authors = [
+    {name = "Alex Nullzero", email = "p4rlx-news@pm.me"},
+]
+requires-python = ">=3.9"
+
+dependencies = [
+    cachetools==5.3.2
+    GitPython==3.1.
+    packaging==23.2
+    python-dotenv==1.0.0
+    pipdeptree==2.13.0
+]
+
+[project.optional-dependencies]
+dev = [
+    "check-manifest",
+    "build",
+]
+test = [
+    "pytest",
+]
