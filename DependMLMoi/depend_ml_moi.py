@@ -1,5 +1,5 @@
-from DependMLMoi.constants import AUTO_INSTALL, REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET, REQUIREMENTS_PATH, LOGS_DIR
-from DependMLMoi.dependencies import main_libraries
+
+
 
 
 ''' A library designed to initialize required modules for MLOps Tools by Nullzero
@@ -13,92 +13,125 @@ Options include:
 import os
 import subprocess
 import sys
-from arg_parser import 
+import logging
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
+from DependMLMoi.utils.logs.log_tool import _logger
+from pathlib import Path
+from arg_parser import parse_args
+from datetime import datetime, timedelta
+from dotenv import load_dotenv, find_dotenv, __version__ as dotenv_version
+from langchain.callbacks import WandbCallbackHandler, StdOutCallbackHandler
 
-libraries = ["WandB", "Langchain", "MLFlow"]
+# Custom imports
+from DependMLMoi.constants import (
+    REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET,
+    REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME
+)
+from DependMLMoi.dependencies import PackageHandler
+from constants import (TYPE, AUTO_INSTALL, REQUIRED_DOTENV_VERSION, 
+                    REQUIREMENTS_PATH, LOGS_DIR, DEBUG, LOGGING, QUIET, CUSTOM, LEVEL)
 
+_logger = _logger
+args = parse_args()
+
+if args.quiet:
+    _logger.basicConfig(level=logging.CRITICAL)
+elif args.debug == True:
+    _logger.basicConfig(level=logging.DEBUG)
+elif args.logging == LEVEL:
+    _logger.basicConfig(level=logging.INFO)
+else:
+    _logger.basicConfig(level=logging.WARNING)
 
 # Constants
-CACHE_FILE = os.path.join(LOGS_DIR, 'setup_cache.log')
+LOGS_DIR = Path('./utils/logs')
+CACHE_FILE = LOGS_DIR / 'setup_cache.log'
 CACHE_DURATION = timedelta(hours=12)
+REQUIRED_DOTENV_VERSION = '1.0.0'  # Replace with actual version
 
-# Function to check if a library is installed and offer to install it
 
+''' Libraries to check:
+
+'''
+LIBRARIES = ["WandB", "Langchain", "MLFlow"]
+
+if CUSTOM != None
+    LIBRARIES.append(CUSTOM)
+    _logger.info(LIBRARIES)
+
+
+def update_cache_timestamp():
+    CACHE_FILE.write_text(datetime.now().isoformat())
+
+def install_dotenv():
+    print(f"Installing python-dotenv=={REQUIRED_DOTENV_VERSION}...")
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', f'python-dotenv=={REQUIRED_DOTENV_VERSION}'])
+    global load_dotenv, find_dotenv
+    from dotenv import load_dotenv, find_dotenv
+   
 
 def check_dotenv():
-    try:
-        # Try to import load_dotenv from dotenv
-        from dotenv import load_dotenv, find_dotenv
-        from dotenv import __version__ as dotenv_version
-        
-        # Check if the required version is installed
-        if dotenv_version == REQUIRED_DOTENV_VERSION:
-            return True
-        else:
-            raise ImportError("Incorrect python-dotenv version installed.")
+    if dotenv_version != REQUIRED_DOTENV_VERSION:
+        install_dotenv()
+    return True
 
-    except ImportError as e:
-        # Attempt to install the correct version of python-dotenv
-        print(f"Installing python-dotenv=={REQUIRED_DOTENV_VERSION}...")
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', f'python-dotenv=={REQUIRED_DOTENV_VERSION}'])
-        # Retry the import after installation
-        from dotenv import load_dotenv, find_dotenv
-        return True
-
-def check_library_installed(library_name, AUTO_INSTALL=False):
+def check_library_installed(library_name, auto_install=False):
     try:
-        subprocess.check_call([sys.executable, '-m', 'pip', 'show', library_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return True
+        subprocess.run([sys.executable, '-m', 'pip', 'show', library_name], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except subprocess.CalledProcessError:
-        if AUTO_INSTALL or (input(f"Do you wish to install {library_name}? (y/n): ").lower() == 'y'):
+        if auto_install or input(f"Do you wish to install {library_name}? (y/n): ").lower() == 'y':
             subprocess.check_call([sys.executable, '-m', 'pip', 'install', library_name])
-            logging
-        return f"{library_name} is not installed. Please install it before continuing."
+        else:
+            return f"{library_name} is not installed. Please install it before continuing."
 
-# Function to check for OPENAI_API_KEY and prompt if not found
-def check_openai_api_key():
-    load_dotenv()
-    openai_api_key = os.getenv('OPENAI_API_KEY')
-    if not openai_api_key:
+def prompt_openai_api_key():
+    if not os.getenv('OPENAI_API_KEY'):
         openai_api_key = input("Enter your OPENAI_API_KEY or 'no' to skip: ").strip()
         if openai_api_key.lower() != 'no':
-            with open('.env', 'a') as f:
-                f.write(f"OPENAI_API_KEY={openai_api_key}\n")
+            Path('.env').write_text(f"OPENAI_API_KEY={openai_api_key}\n", mode='a')
 
-# Function to run wandb login if WAND* is not in environment
 def check_wandb_login():
-    dotenv.load_dotenv()
     if not any(key.startswith('WAND') for key in os.environ):
         try:
-            import wandb
-            wandb.login()
-        except ImportError:
-            print("wandb is not installed. Please install it before continuing.")
+            print("Enter your WANDB API KEY")
+            Path('.env').write_text(f"'WANDB_API_KEY'={wandb.login()}\n", mode='a')
+        except Exception as e:
+            _logger.error(e)
+        import wandb
+        wandb.login(key=os.getenv('WANDB_API_KEY'))
+        if NAME == None:
+            project = f"default-{datetime.date(datetime.now())}"
+            wandb.config(project=project)
+            _logger.info("Default project name: {}".format(project))
+        else:
+            wandb.config(project=NAME)
+            _logger.info("Project name: {}".format(NAME))
+    
+    if TYPE == "LLM" | "GPT" | "GPTApp":
+        session_group = datetime.now().strftime("%m.%d.%Y_%H.%M.%S")
+        wandb_callback = WandbCallbackHandler(
+        job_type="inference",
+        project=project,
+        group=f"minimal_{session_group}",
+        username = os.getenv('USER') or os.getenv('USERNAME')
+        tags=["test"],
+        )
+        callbacks = [StdOutCallbackHandler(), wandb_callback]
 
-# Function to add .env to .gitignore
+        return callbacks
+
 def update_gitignore():
-    gitignore_path = '.gitignore'
-    if not os.path.exists(gitignore_path) or '.env' not in open(gitignore_path).read():
-        with open(gitignore_path, 'a') as file:
-            file.write('\n# dotenv environment variables file\n.env\n')
+    gitignore_path = Path('.gitignore')
+    if '.env' not in gitignore_path.read_text():
+        gitignore_path.write_text('\n# dotenv environment variables file\n.env\n', mode='a')
 
-# Function to check if setup needs to run based on cache
 def is_setup_required():
-    if not os.path.exists(LOGS_DIR):
-        os.makedirs(LOGS_DIR)
+    LOGS_DIR.mkdir(exist_ok=True)
+    if not CACHE_FILE.exists():
         return True
-    if not os.path.exists(CACHE_FILE):
-        return True
-    with open(CACHE_FILE, 'r') as file:
-        timestamp = datetime.fromisoformat(file.read().strip())
+    timestamp = datetime.fromisoformat(CACHE_FILE.read_text().strip())
     return datetime.now() > timestamp + CACHE_DURATION
 
-# Function to update the cache timestamp
-def update_cache_timestamp():
-    with open(CACHE_FILE, 'w') as file:
-        file.write(datetime.now().isoformat())
 
 # Main function to run all setup steps
 def debug_setup(AUTO_INSTALL=False, DEBUG=False):
@@ -110,34 +143,49 @@ def debug_setup(AUTO_INSTALL=False, DEBUG=False):
     except Exception as e:
         print(e)
 
-    
+
+# This function is now the main entry point to the library. It should be called explicitly.
+def run_setup(auto_install=False):
+    # Check if dotenv is installed and meets the required version
+    if not check_dotenv(REQUIRED_DOTENV_VERSION, auto_install):
+        sys.exit("The required dotenv version is not installed.")
+
+    # Example usage
     if is_setup_required():
-        check_library_installed('python-dotenv', AUTO_INSTALL)
-        check_library_installed('wandb', AUTO_INSTALL)
-        check_openai_api_key()
-        check_wandb_login()
-        update_gitignore()
         update_cache_timestamp()
-        print("Setup complete.")
-    else:
-        print("Setup already completed within the last 12 hours.")
+        check_dotenv()
+        for lib in libraries:
+            try:
+                check_library_installed(lib, auto_install=True)
+            except Exception as e:
+                _logger.error({}+" error thrown", e)   
+        try:
+            prompt_openai_api_key()
+            check_wandb_login()
+            update_gitignore()
+            logging.info("Setup complete.")
+        except Exception as e:
+            _logger.error({}+" error thrown", e)    
+        except CACHE_DURATION:
+            _logger.info("Setup already completed within the last 12 hours:\n {}", format(cache))
 
-# Run setup when module is imported
-def dep_main():
-    main_libraries()
+# The functions below are part of the library's API
+def setup(auto_install=False):
+    """The public API function to setup dependencies."""
+    run_setup(auto_install=auto_install)
 
-    
-
-    # Run the check and load .env when module is imported
-    if check_dotenv():
-        load_dotenv(find_dotenv())
-    run_setup(AUTO_INSTALL=AUTO_INSTALL)
-
-
-
-
-
-
-
+# The code below is not executed on import, which is a good practice for libraries
 if __name__ == "__main__":
-    main()
+    dotenv_path = find_dotenv()
+    if dotenv_path:
+        load_dotenv(dotenv_path)
+    else:
+        logging.warning("No .env file found.")
+    # Example: Run setup with AUTO_INSTALL if the corresponding environment variable is set
+    setup(auto_install=os.getenv('AUTO_INSTALL', 'False').lower() in ('true', '1', 't'))
+
+
+
+
+
+
