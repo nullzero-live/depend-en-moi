@@ -4,3 +4,4 @@ dom/
 env.*
 env/
 arc/
+.pypirc
