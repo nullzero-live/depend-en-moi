@@ -43,7 +43,7 @@ def check_packages(required_packages):
             print(f"pip install -r {REQUIREMENTS_PATH}")
             sys.exit(1)
         print(f"{missing_packages} were successfully installed.")
-def main():
+def main_libraries():
     try:
         upgrade_pip()
     except Exception as e:
@@ -56,4 +56,4 @@ def main():
     from dotenv import load_dotenv, find_dotenv
     load_dotenv(find_dotenv())
 
-main()
+

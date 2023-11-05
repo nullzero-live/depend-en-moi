@@ -1,8 +1,5 @@
-from _constants import *
-import _libraries
-import arg_parser
-
-
+from _constants import AUTO_INSTALL, REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET, REQUIREMENTS_PATH, LOGS_DIR
+from _libraries import main_libraries
 
 
 ''' A library designed to initialize required modules for MLOps Tools by Nullzero
@@ -13,18 +10,17 @@ Options include:
 - MLFlow (ToDo)
 
 '''
+import os
+import subprocess
+import sys
+from arg_parser import 
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 libraries = ["WandB", "Langchain", "MLFlow"]
 
 
-import os
-import subprocess
-import sys
-from datetime import datetime, timedelta
-from dotenv import load_dotenv
-
 # Constants
-LOGS_DIR = 'logs'
 CACHE_FILE = os.path.join(LOGS_DIR, 'setup_cache.log')
 CACHE_DURATION = timedelta(hours=12)
 
@@ -34,7 +30,8 @@ CACHE_DURATION = timedelta(hours=12)
 def check_dotenv():
     try:
         # Try to import load_dotenv from dotenv
-        from dotenv import load_dotenv, find_dotenv, __version__ as dotenv_version
+        from dotenv import load_dotenv, find_dotenv
+        from dotenv import __version__ as dotenv_version
         
         # Check if the required version is installed
         if dotenv_version == REQUIRED_DOTENV_VERSION:
@@ -50,10 +47,6 @@ def check_dotenv():
         from dotenv import load_dotenv, find_dotenv
         return True
 
-# Run the check and load .env when module is imported
-if check_dotenv():
-    load_dotenv(find_dotenv())
-
 def check_library_installed(library_name, AUTO_INSTALL=False):
     try:
         subprocess.check_call([sys.executable, '-m', 'pip', 'show', library_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -64,12 +57,9 @@ def check_library_installed(library_name, AUTO_INSTALL=False):
             logging
         return f"{library_name} is not installed. Please install it before continuing."
 
-
-
-
 # Function to check for OPENAI_API_KEY and prompt if not found
 def check_openai_api_key():
-    dotenv.load_dotenv()
+    load_dotenv()
     openai_api_key = os.getenv('OPENAI_API_KEY')
     if not openai_api_key:
         openai_api_key = input("Enter your OPENAI_API_KEY or 'no' to skip: ").strip()
@@ -120,7 +110,7 @@ def debug_setup(AUTO_INSTALL=False, DEBUG=False):
     except Exception as e:
         print(e)
 
-    if check_library_installed('python-dotenv') != True:
+    
     if is_setup_required():
         check_library_installed('python-dotenv', AUTO_INSTALL)
         check_library_installed('wandb', AUTO_INSTALL)
@@ -133,8 +123,15 @@ def debug_setup(AUTO_INSTALL=False, DEBUG=False):
         print("Setup already completed within the last 12 hours.")
 
 # Run setup when module is imported
-def main():
-run_setup(AUTO_INSTALL=False)
+def dep_main():
+    main_libraries()
+
+    
+
+    # Run the check and load .env when module is imported
+    if check_dotenv():
+        load_dotenv(find_dotenv())
+    run_setup(AUTO_INSTALL=AUTO_INSTALL)
 
 
 
