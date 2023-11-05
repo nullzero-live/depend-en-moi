@@ -111,7 +111,7 @@ def check_wandb_login():
         job_type="inference",
         project=project,
         group=f"minimal_{session_group}",
-        username = os.getenv('USER') or os.getenv('USERNAME')
+        username = (os.getenv('USER') | os.getenv('USERNAME')
         tags=["test"],
         )
         callbacks = [StdOutCallbackHandler(), wandb_callback]
