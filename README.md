@@ -23,7 +23,7 @@ Here's what it can do for you:
 - 🐳 Adds `.env` to your `.dockerfile` if one exists in your project.
 - ✅ Handles login and other necessary preliminary steps to get you up and running.
 
-Depend-en-moi is designed to get your application ready for enhanced logging in LangChain, WandB, HumanLoop, MLFlow, and more...
+Depend-en-moi is designed to get your application ready for a quick, streamlined login, and config in LangChain, WandB, HumanLoop, MLFlow, and more...
 
 ### Always Evolving 👷
 
@@ -68,4 +68,28 @@ Depend En Moi is open-source software [licensed as MIT](LICENSE).
 Made with 💖 and a lot of ☕ by [Nullzero](<https://github.com/nullzero-live/>).
 ```
 
-## Early production phase
+---
+
+## Aha-To-Do List
+
+### ToDo:
+- [ ] **Complete argparser for intuitive use**
+- [ ] **Add a "--c" flag to arg_parser to add custom libraries**
+- [ ] **Abstract out the library types for incorporation of any library**
+- [ ] **Include MLFlow and Humanloop config**
+- [ ] **Parse out the syntax from each**
+- [ ] **Option to dump dependencies or next steps into an external file**
+
+### Done ✅
+- [x] **.Devcontainer**
+- [x] **_constants**
+- [x] **utils**
+- [x] **main**
+- [x] **planned structure**
+
+### And dennnnn......
+- [ ] ❌ **Very little (help a fellow out!)**
+
+🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+
+

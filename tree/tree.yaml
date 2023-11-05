@@ -1,6 +1,6 @@
 .
 ├── LICENSE.txt
-├── README.me
+├── README.md
 ├── __init__.py
 ├── docs
 ├── dp_enmoi
@@ -18,10 +18,12 @@
 ├── requirements.txt
 ├── setup.cfg
 ├── setup.py
+├── tests
+├── todo.md
 └── tree
     ├── dep_en_moi.yaml
     ├── module_guidance.yaml
     ├── proj-tree.txt
     └── tree.yaml
 
-6 directories, 19 files
+7 directories, 20 files
