@@ -15,13 +15,6 @@ parser.add_argument('-c', '--custom', action='store_true', help='add a custom li
 # Parse the arguments
 args = parser.parse_args()
 
-# Set the variables based on the flags
-AUTO_INSTALL = args.auto
-DEBUG = args.debug
-LOGGING = args.logging
-QUIET = args.quiet
-
-
 # If '-q' or '--quiet' is set, suppress the output
 if args.custom:
     custom_list = []
@@ -33,6 +26,12 @@ if args.quiet:
         with redirect_stdout(f):
             print('This will not appear anywhere')
     
+
+
+
+
+
+
 
 
 
