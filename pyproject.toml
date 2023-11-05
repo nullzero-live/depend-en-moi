@@ -41,11 +41,11 @@ dev = [
     "build",
 ]
 test = [
-    "pytest"
+    "pytest",
 ]
 
 [tool.setuptools]
-package-dir = {"": "./DependMLMoi"}
+package-dir = {"DependMLMoi" = "DependMLMoi"}
 
 [project.scripts]
-dependMLOps = "scripts/main.py:main_function"
+dependMLOps = "dependMLOps.scripts.main:main_function"
