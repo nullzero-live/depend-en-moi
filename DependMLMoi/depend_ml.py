@@ -145,7 +145,7 @@ def debug_setup(AUTO_INSTALL=False, DEBUG=False):
 
 
 # This function is now the main entry point to the library. It should be called explicitly.
-def run_setup(auto_install=False):
+def run_setup(auto_install=False, args*):
     # Check if dotenv is installed and meets the required version
     if not check_dotenv(REQUIRED_DOTENV_VERSION, auto_install):
         sys.exit("The required dotenv version is not installed.")
