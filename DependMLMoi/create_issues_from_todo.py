@@ -1,5 +1,5 @@
 import os
-from github import Github
+from github import GHClient as gh
 from active_repo import get_remote_url, repo_main
 
 repo = repo_main()
@@ -21,7 +21,7 @@ def create_issue_if_not_exists(repo, todo):
         repo.create_issue(title=todo, body='')
 
 
-g = Github(os.getenv('GITHUB_TOKEN'))
+g = gh(os.getenv('GITHUB_TOKEN'))
 repo = g.get_repo(repo)
 
 todos = parse_todo_file('../TODO.md')

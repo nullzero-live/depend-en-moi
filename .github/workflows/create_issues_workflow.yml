@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'TODO.md'
-      - 'active_repo.py'
+      - '../TODO.md'
+      - '../active_repo.py'
       - '../create_issues_from_todo.py'
 
 jobs:
