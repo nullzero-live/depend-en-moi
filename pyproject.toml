@@ -48,4 +48,4 @@ test = [
 package-dir = {"DependMLMoi" = "DependMLMoi"}
 
 [project.scripts]
-dependMLOps = "dependMLOps.scripts.main:main"
+dependMLOps = "scripts.main:main"

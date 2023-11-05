@@ -25,11 +25,9 @@ from langchain.callbacks import WandbCallbackHandler, StdOutCallbackHandler
 # Custom imports
 from DependMLMoi.constants import (
     REQUIRED_DOTENV_VERSION, DEBUG, LOGGING, QUIET,
-    REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME
+    REQUIREMENTS_PATH, LOGS_DIR, AUTO_INSTALL, NAME, CUSTOM
 )
 from DependMLMoi.dependencies import PackageHandler
-from constants import (TYPE, AUTO_INSTALL, REQUIRED_DOTENV_VERSION, 
-                    REQUIREMENTS_PATH, LOGS_DIR, DEBUG, LOGGING, QUIET, CUSTOM, LEVEL)
 
 _logger = _logger
 args = parse_args()
@@ -55,7 +53,7 @@ REQUIRED_DOTENV_VERSION = '1.0.0'  # Replace with actual version
 '''
 LIBRARIES = ["WandB", "Langchain", "MLFlow"]
 
-if CUSTOM != None
+if CUSTOM is not None:
     LIBRARIES.append(CUSTOM)
     _logger.info(LIBRARIES)
 
