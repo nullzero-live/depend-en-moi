@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Depend En Moi',
+    name='DependMLOps',
     version='0.0.1',
     author='Nullzero',
     author_email='p4rlx-news@pm.me',

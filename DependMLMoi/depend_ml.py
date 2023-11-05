@@ -169,6 +169,8 @@ def run_setup(auto_install=False, args*):
         except CACHE_DURATION:
             _logger.info("Setup already completed within the last 12 hours:\n {}", format(cache))
 
+
+
 # The functions below are part of the library's API
 def setup(auto_install=False):
     """The public API function to setup dependencies."""

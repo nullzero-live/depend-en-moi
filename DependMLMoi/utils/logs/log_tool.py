@@ -22,3 +22,5 @@ file_handler.setFormatter(formatter)
 
 # Add the handlers to the logger
 _logger.addHandler(file_handler)
+
+_logger = _logger
