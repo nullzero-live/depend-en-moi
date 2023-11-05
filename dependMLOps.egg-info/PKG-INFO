@@ -41,10 +41,13 @@ Depend En Moi streamlines your machine learning and LLM lifecycle management ope
 ### Current Status
 5th November 2023: **Early Development** 👼
 
+Link: [https://github.com/nullzero-live/depend-en-moi](https://github.com/nullzero-live/depend-en-moi) 👾
+
+
 ### What It Does 🧐
 Right now - not that much, it's brand new and the Nullzero's first module. Scary! 
 
-Depend En Moi is a tool tailored for machine learning projects, with a special focus on MLOps tools such as Langchain, OpenAI (openai), Weights and Biases (wandb), and MLFlow (mflow), Humanloop (humanloop.com) -- Always adding more. 
+Depend En Moi is a tool tailored for machine learning projects, with a special focus on MLOps & LLMOps tools such as Langchain, OpenAI (openai), Weights and Biases (wandb), MLFlow (mflow), Humanloop (humanloop.com) -- Always adding more. 
 
 Here's what it can do for you:
 
@@ -74,6 +77,8 @@ tree==0.2.4
 langchain==0.0.330
 openai==0.28.1
 wandb==0.15.12
+
+and more... browse requirements.txt and the source codefor more information.
 ```
 
 ### Getting Started 🌟
@@ -90,6 +95,8 @@ python setup.py install
 
 Interested in contributing? We love pull requests and issues from fellow MLOps enthusiasts. Fork away and submit your PR as necessary.
 
+This is a very underdeveloped library that I will continue to work on. I'd be interested in seeing how others are able to improve it for optimizing MLOps and LLMOps
+
 ### License ⚖️
 
 Depend En Moi is open-source software [licensed as MIT](LICENSE).
@@ -104,6 +111,7 @@ Made with 💖 and a lot of ☕ by [Nullzero](<https://github.com/nullzero-live/
 ## Aha-To-Do List
 
 ### ToDo:
+- [ ] **Get rid of the github stuff from the library
 - [ ] **Complete argparser for intuitive use**
 - [ ] **Add a "--c" flag to arg_parser to add custom libraries**
 - [ ] **Abstract out the library types for incorporation of any library**
@@ -117,10 +125,13 @@ Made with 💖 and a lot of ☕ by [Nullzero](<https://github.com/nullzero-live/
 - [x] **utils**
 - [x] **main**
 - [x] **planned structure**
+- [x] ** Library c'est complete
 
 ### And dennnnn......
 - [ ] ❌ **Very little (help a fellow out!)**
 
 🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+
+-- Nullzero
 
 
