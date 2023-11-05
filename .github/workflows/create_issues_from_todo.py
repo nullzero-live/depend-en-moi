@@ -1,8 +1,8 @@
 import os
 from github import Github
-from active_repo import get_remote_url
+from active_repo import get_remote_url, repo_main
 
-repo = get_remote_url()
+repo = repo_main()
 
 # Parse 'TODO.md' and extract todo items
 def parse_todo_file(file_path):

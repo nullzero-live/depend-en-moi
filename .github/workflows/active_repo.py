@@ -12,8 +12,8 @@ def get_remote_url():
             check=True
         )
         return result.stdout.strip()
-    except subprocess.CalledProcessError:
-        return remote_url
+    except subprocess.CalledProcessError as e:
+        print(e)
 
 # Function to get the latest commit date
 def get_latest_commit_date():
@@ -41,12 +41,15 @@ def is_repo_active():
         return False
 
 # Use the functions
-remote_url = get_remote_url()
-if remote_url:
-    print(f"Remote URL: {remote_url}")
-    if is_repo_active():
-        print("The repository is active.")
+def repo_main():
+    remote_url = get_remote_url()
+    if remote_url:
+        print(f"Remote URL: {remote_url}")
+        if is_repo_active():
+            print("The repository is active.")
+            return remote_url
+            
+        else:
+            print("The repository is not active.")
     else:
-        print("The repository is not active.")
-else:
-    print("No remote repository found for this directory.")
+        print("No remote repository found for this directory.")
