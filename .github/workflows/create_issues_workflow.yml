@@ -24,8 +24,8 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python3 -m pip install --upgrade pip |
+          pip install -r ../requirements.txt
 
       - name: Check if repository is active
         id: active_check
