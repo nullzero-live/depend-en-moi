@@ -1,5 +1,5 @@
 import os
-from github import GHClient as gh
+from Github import GHClient as gh
 from active_repo import get_remote_url, repo_main
 
 repo = repo_main()
