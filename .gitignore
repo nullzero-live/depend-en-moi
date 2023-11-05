@@ -1,3 +1,6 @@
 dom/
 .env
 .github/
+*.env
+env.*
+env/

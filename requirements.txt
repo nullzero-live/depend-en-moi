@@ -8,6 +8,7 @@ tree == 0.2.4
 langchain == 0.0.330
 openai==0.28.1
 wandb==0.15.12
+gh==2.37.0
 
 
 
