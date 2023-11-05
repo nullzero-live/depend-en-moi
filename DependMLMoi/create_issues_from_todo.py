@@ -4,8 +4,8 @@ from github import Auth
 from active_repo import get_remote_url, repo_main
 
 auth = Auth.Token(os.getenv('GITHUB_TOKEN'))
-gh = gh(auth=auth)
-gh.getuser().login
+g = gh(auth=auth)
+g.getuser().login
 repo = repo_main()
 
 # Parse 'TODO.md' and extract todo items
