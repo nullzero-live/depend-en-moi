@@ -20,12 +20,10 @@ def create_issue_if_not_exists(repo, todo):
     if not issue_exists(repo, todo):
         repo.create_issue(title=todo, body='')
 
-# Main script execution
-if __name__ == "__main__":
-    # Authenticate with GitHub
-    g = Github(os.getenv('GITHUB_TOKEN'))
-    repo = g.get_repo(repo)
 
-    todos = parse_todo_file('../TODO.md')
-    for todo in todos:
-        create_issue_if_not_exists(repo, todo)
+g = Github(os.getenv('GITHUB_TOKEN'))
+repo = g.get_repo(repo)
+
+todos = parse_todo_file('../TODO.md')
+for todo in todos:
+    create_issue_if_not_exists(repo, todo)
