@@ -1,0 +1,32 @@
+name: Create Issues from TODO
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'TODO.md' 
+      - 'create_issues_from_todo.py' 
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11' # Specify the Python version you are using
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run the script to create issues from TODO.md
+      run: python create_issues_from_todo.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
