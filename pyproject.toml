@@ -2,14 +2,9 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-package-dir = {"": "DependMLMoi"}
-
-
 [project]
 name = 'dependMLOps'
 version = '0.0.1'
-dynamic = ["dependencies"]
 description = 'Manage MLOps Dependencies and More...'
 readme = 'README.md'
 license = {file = 'LICENSE.txt'}
@@ -22,9 +17,6 @@ authors = [
     {name = "Aylex Nullzero", email = "p4rlx-news@pm.me"},
 ]
 requires-python = ">=3.9"
-
-[python-entrypoint-reference]
-script = "scripts/main.py"
 
 dependencies = [
     "aiohttp==3.8.1",
@@ -41,7 +33,7 @@ dependencies = [
     "python-dotenv==1.0.0",
     "tomli==2.0.1",
     "Tree==0.2.4"
-    ]
+]
 
 [project.optional-dependencies]
 dev = [
@@ -51,3 +43,9 @@ dev = [
 test = [
     "pytest"
 ]
+
+[tool.setuptools]
+package-dir = {"": "./DependMLMoi"}
+
+[project.scripts]
+dependMLOps = "scripts/main.py:main_function"
