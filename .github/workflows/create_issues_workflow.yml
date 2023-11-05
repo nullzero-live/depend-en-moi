@@ -31,10 +31,10 @@ jobs:
         id: active_check
         run: python active_repo.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TK }}
 
       - name: Create issues from TODO.md if repo is active
         if: steps.active_check.outputs.repo_active == 'true'
         run: python create_issues_from_todo.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TK }}
