@@ -1,4 +1,4 @@
-from .arg_parser import parse_args
+from arg_parser import parse_args
 
 #Default
 NAME = None
@@ -13,6 +13,7 @@ REQUIREMENTS_PATH = "./requirements.txt"
 LOGS_DIR = "./utils/donmor.log"
 
 args = parse_args()
+print(args)
 
 
 

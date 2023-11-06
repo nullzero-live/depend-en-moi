@@ -24,8 +24,6 @@ def create_issue_if_not_exists(repo, todo):
     if not issue_exists(repo, todo):
         repo.create_issue(title=todo, body='')
 
-
-
 repo = g.get_repo(repo)
 
 todos = parse_todo_file('../TODO.md')
