@@ -60,6 +60,20 @@ cd depend-en-moi
 python setup.py install
 ```
 
+### Flags 🛠️
+```bash
+- `-n, --name`: Sets the `AUTO_INSTALL` variable to True.
+- `-c, --custom`: Adds a custom library.
+- `--auto`: Sets the `AUTO_INSTALL` variable to True.
+- `--debug`: Sets the `DEBUG` variable to True.
+- `--logging`: Sets the `LOGGING` variable to True.
+- `-q, --quiet`: Suppresses the output.
+- `-l, --level`: Sets the logging level. (Note: The action may need to be changed to `store` instead of `store_true` if a value is to be provided)
+- `-t, --type`: Specifies the Type of App (LLM, ML, Web). (Note: The action may need to be changed to `store` instead of `store_true` if a value is to be provided)
+- `-v, --version`: Displays the version of DependMLOps.
+
+```
+
 ### Contributing 🤝
 
 Interested in contributing? We love pull requests and issues from fellow MLOps enthusiasts. Fork away and submit your PR as necessary.
@@ -76,6 +90,7 @@ Made with 💖 and a lot of ☕ by [Nullzero](<https://github.com/nullzero-live/
 ```
 
 ---
+
 
 ## Aha-To-Do List
 

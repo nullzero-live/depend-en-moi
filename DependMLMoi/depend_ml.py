@@ -21,6 +21,7 @@ from arg_parser import parse_args
 from datetime import datetime, timedelta
 from dotenv import load_dotenv, find_dotenv, __version__ as dotenv_version
 from langchain.callbacks import WandbCallbackHandler, StdOutCallbackHandler
+from liblist import supported_libraries
 
 # Custom imports
 from DependMLMoi.constants import (
@@ -49,7 +50,9 @@ REQUIRED_DOTENV_VERSION = '1.0.0'  # Replace with actual version
 ''' Libraries to check:
 
 '''
-LIBRARIES = ["WandB", "Langchain", "MLFlow"]
+def lib_list():
+    LIBRARIES = supported_libraries
+    LIBRARIES.append(CUSTOM)
 
 if CUSTOM is not None:
     LIBRARIES.append(CUSTOM)
