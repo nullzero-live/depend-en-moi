@@ -5,3 +5,5 @@ env.*
 env/
 arc/
 .pypirc
+./dependMLOps.eggo-info/
+./dist/
