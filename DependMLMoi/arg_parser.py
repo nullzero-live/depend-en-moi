@@ -8,7 +8,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Process some flags.")
 
     # Add the flags to the parser
-    parser.add_argument('-n, --name', action='store_true', help='sets the name of the project', default="my_project_1")
+    parser.add_argument('--name, -n', action='store_true', help='sets the name of the project', default="my_project_1")
     parser.add_argument('--auto', action='store_true', help='Sets the AUTO_INSTALL variable to True', default=False)
     parser.add_argument('--debug', action='store_true', help='Sets the DEBUG variable to True', default=False)
     parser.add_argument('--logging', action='store_true', help='Sets the LOGGING variable to True', default=True)
