@@ -7,7 +7,7 @@ setup(
     author_email='p4rlx-news@pm.me',
     packages=find_packages(),
     license='LICENSE.txt',
-    description='An MLOps and LLMOps Toolkit',
+    description='An ML & LLMOps Toolkit',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     classifiers=[
